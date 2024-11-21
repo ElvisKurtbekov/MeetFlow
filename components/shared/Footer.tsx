@@ -15,7 +15,7 @@ const Footer = () => {
                         height={38}
                     />
                 </Link>
-                <p>2024 MeetFlow. All Rights reserved.</p>
+                <p>2024 MeetFlow. Все права защищены.</p>
             </div>
         </footer>
     )
