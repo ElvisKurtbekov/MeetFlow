@@ -27,26 +27,25 @@ import { Checkbox } from "../ui/checkbox"
 import { useUploadThing } from '@/lib/uploadthing' 
 import { createEvent } from "@/lib/actions/event.actions"
 
-const formSchema = z.object({
-    username: z.string().min(2, {
-        message: "Имя пользователя должно быть меньше 2 символов"
-    }),
-})
-
 type EventFormProps = {
     userId: string
     type: "Создать" | "Обновить"   
 }
 
 const EventForm = ({userId, type}: EventFormProps) => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            "username": "",
-        },
+
+    const [files, setFiles] = useState<File[]>([])
+    const [startDate, setStartDate] = useState(new Date());
+    const initialValues = eventDefaultValues;
+
+    const { startUpload } = useUploadThing('imageUploader')
+
+    const form = useForm<z.infer<typeof eventFormSchema>>({
+        resolver: zodResolver(eventFormSchema),
+        defaultValues: initialValues
       })
      
-      function onSubmit(values: z.infer<typeof formSchema>) {
+      function onSubmit(values: z.infer<typeof eventFormSchema>) {
         console.log(values)
       }
 
@@ -56,15 +55,12 @@ const EventForm = ({userId, type}: EventFormProps) => {
         <div className="flex flex-col gap-5 md:flex-row">
             <FormField
                 control={form.control}
-                name="username"
+                name="title"
                 render={({ field }) => (
                     <FormItem className="w-full">
                     <FormControl>
-                        <Input placeholder="shadcn" {...field} className="input-field"/>
+                        <Input placeholder="Название мероприятия" {...field} className="input-field"/>
                     </FormControl>
-                    <FormDescription>
-                        Это публичное имя
-                    </FormDescription>
                     <FormMessage />
                     </FormItem>
                 )}
@@ -76,6 +72,21 @@ const EventForm = ({userId, type}: EventFormProps) => {
                     <FormItem className="w-full">
                     <FormControl>
                         <Dropdown onChangeHandler={field.onChange} value={field.value} />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
+            />
+        </div>
+        
+        <div className="flex flex-col gap-5 md:flex-row">
+            <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                    <FormItem className="w-full">
+                    <FormControl className="h-72">
+                        <Textarea placeholder="Описание" {...field} className="textarea rounded-2xl"/>
                     </FormControl>
                     <FormMessage />
                     </FormItem>
