@@ -34,7 +34,24 @@ const Dropdown = ({value, onChangeHandler}: DropdownProbs) => {
 
   const handleAddCategory = () => {
 
+    createCategory({
+      categoryName: newCategory.trim()
+    })
+      .then((category) => {
+        setCategories((prevState) => [...prevState, category])
+      })
   }
+
+  useEffect(() => {
+    const getCategories = async () => {
+        const categoryList = await getAllCategories();
+
+        categoryList && setCategories(categoryList as ICategory[])
+    }
+
+    getCategories();
+  }, [])
+
 
   return (
     <Select onValueChange={onChangeHandler} defaultValue={value}>
@@ -48,7 +65,8 @@ const Dropdown = ({value, onChangeHandler}: DropdownProbs) => {
                 </SelectItem>
              ))}
             <AlertDialog>
-                <AlertDialogTrigger className="p-medium-14 flex w-full rounded-sm py-3 pl-8 text-primary-500 hover:bg-primary-50 focus:text-primary-500">Новая категория</AlertDialogTrigger>
+                <AlertDialogTrigger className="p-medium-14 flex w-full rounded-sm py-3 pl-8 text-primary-500 hover:bg-primary-50 focus:text-primary-500">Добавить новую категорию</AlertDialogTrigger>
+
                 <AlertDialogContent className="bg-white">
                     <AlertDialogHeader>
                     <AlertDialogTitle>Новая категория</AlertDialogTitle>
