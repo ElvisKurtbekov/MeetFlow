@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Удалите старый импорт Poppins и добавьте новый */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap&subset=latin,cyrillic');
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -74,8 +77,10 @@
 }
 
 body {
-  font-family: var(--font-poppins)
+  --font-montserrat: 'Montserrat', sans-serif;
+  font-family: var(--font-montserrat);
 }
+
 
 .filter-grey {
   filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(217%)
