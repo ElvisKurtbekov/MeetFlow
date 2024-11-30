@@ -31,7 +31,7 @@ export default function Home() {
         <h2 className="h3-bold">Доверие <br /> Благодаря Тысячам Событий</h2>
 
         <div className="flex w-full flex-col gap-5 md:flex-row">
-          Поиск Фильт по категориям
+          Поиск Фильтр по категориям
         </div>
        </section>
     </>
