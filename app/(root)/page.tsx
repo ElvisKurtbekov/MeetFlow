@@ -12,8 +12,6 @@ export default async function Home() {
     limit: 6
   })
 
-  
-
   return (
     <>
        <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
@@ -42,11 +40,11 @@ export default async function Home() {
         <h2 className="h3-bold">Доверие <br /> Благодаря Тысячам Событий</h2>
 
         <div className="flex w-full flex-col gap-5 md:flex-row">
-          Поиск Фильтр по категориям
+          Поиск Фильт по категориям
         </div>
 
           <Collection
-            data={[]}
+            data={events?.data}
             emptyTitle="Мероприятий не найдено"
             emptyStateSubtext="Возвращайтесь позже"
             collectionType="All_Events"

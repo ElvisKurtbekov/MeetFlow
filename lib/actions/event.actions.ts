@@ -6,6 +6,17 @@ import { connectToDatabase } from "../database"
 import User from "../database/models/user.model"
 import Event from "../database/models/event.model"
 import Category from "../database/models/category.model"
+import { handleError } from '@/lib/utils'
+
+import {
+  CreateEventParams,
+  UpdateEventParams,
+  DeleteEventParams,
+  GetAllEventsParams,
+  GetEventsByUserParams,
+  GetRelatedEventsByCategoryParams,
+} from '@/types'
+
 
 const populateEvent = async (query: any) => {
   return query
@@ -73,5 +84,17 @@ export const getAllEvents= async ({query, limit = 6, page, category}: GetAllEven
     }
   } catch (error) {
     handleError(error);
+  }
+}
+
+// DELETE
+export async function deleteEvent({ eventId, path }: DeleteEventParams) {
+  try {
+    await connectToDatabase()
+
+    const deletedEvent = await Event.findByIdAndDelete(eventId)
+    if (deletedEvent) revalidatePath(path)
+  } catch (error) {
+    handleError(error)
   }
 }
