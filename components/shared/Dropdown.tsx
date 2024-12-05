@@ -68,7 +68,7 @@ const Dropdown = ({value, onChangeHandler}: DropdownProbs) => {
                     <AlertDialogHeader>
                     <AlertDialogTitle>Новая категория</AlertDialogTitle>
                     <AlertDialogDescription>
-                        <Input type="text" placeholder="Category name" className="input-field mt-3" onChange={(e) => setNewCategory(e.target.value)}/>
+                        <Input type="text" placeholder="Название категории" className="input-field mt-3" onChange={(e) => setNewCategory(e.target.value)}/>
                     </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>

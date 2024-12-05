@@ -37,7 +37,7 @@ export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>Отмена</AlertDialogCancel>
 
           <AlertDialogAction
             onClick={() =>
@@ -45,7 +45,7 @@ export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
                 await deleteEvent({ eventId, path: pathname as string }) //может тут неправильно (path: pathname as string)
               })
             }>
-            {isPending ? 'Удаление...' : 'Удалено'}
+            {isPending ? 'Удаление...' : 'Удалить'}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
