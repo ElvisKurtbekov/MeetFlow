@@ -37,6 +37,15 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
     <section className='wrapper my-8'>
     <Collection
             data={orderedEvents}
+            emptyTitle="Билеты на мероприятия еще не приобретены"
+            emptyStateSubtext="Не беспокойтесь - Вас ждет множество захватывающих мероприятий!"
+            collectionType="My_Tickets"
+            limit={3}
+            page={ordersPage}
+            urlParamName="ordersPage"
+            totalPages={orders?.totalPages}
+          />
+    </section>
 
     {/* Events organized */}
     <section className='bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10'>
@@ -56,7 +65,7 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
             emptyTitle="Мероприятия еще не были созданы"
             emptyStateSubtext="Создавай прямо сейчас"
             collectionType="Events_Organized"
-            limit={6}
+            limit={3}
             page={eventsPage}
             urlParamName="eventsPage"
             totalPages={organizedEvents?.totalPages}
