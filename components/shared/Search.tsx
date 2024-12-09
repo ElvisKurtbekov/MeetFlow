@@ -6,7 +6,7 @@ import { Input } from '../ui/input';
 import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-const Search = ({ placeholder = 'Search title...' }: { placeholder?: string }) => {
+const Search = ({ placeholder = 'Поиск в MeetFlow' }: { placeholder?: string }) => {
   const [query, setQuery] = useState('');
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -17,22 +17,22 @@ const Search = ({ placeholder = 'Search title...' }: { placeholder?: string }) =
 
       if(query) {
         newUrl = formUrlQuery({
-          params: searchParams?.toString(),
+          params: searchParams?.toString() || '', // Использование пустой строки, если searchParams = null
           key: 'query',
           value: query
-        })
+        });
       } else {
         newUrl = removeKeysFromQuery({
-          params: searchParams?.toString(),
+          params: searchParams?.toString() || '', // Использование пустой строки, если searchParams = null
           keysToRemove: ['query']
-        })
+        });
       }
 
       router.push(newUrl, { scroll: false });
-    }, 300)
+    }, 300);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [query, searchParams, router])
+  }, [query, searchParams, router]);
 
   return (
     <div className="flex-center min-h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
