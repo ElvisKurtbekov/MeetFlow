@@ -58,14 +58,17 @@ const EventDetails = async ({ params: {id}, searchParams}: SearchParamProps) => 
                             width={32}
                             height={32}
                         />
-                        <div className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center">
-                            <p>{formatDateTime(event.startDateTime).dateOnly} - {' '}
-                               {formatDateTime(event.startDateTime).timeOnly}
+
+                        <div className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center gap-2">
+                            <p>
+                                {new Intl.DateTimeFormat('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(event.startDateTime))} - {' '}
+                                {new Intl.DateTimeFormat('ru-RU', { hour: '2-digit', minute: '2-digit' }).format(new Date(event.startDateTime))}
                             </p>
-                            <p>{formatDateTime(event.endDateTime).dateOnly} - {' '}
-                               {formatDateTime(event.endDateTime).timeOnly}
+                            <span>&nbsp;&nbsp;</span> {/* пробел между датами */}
+                            <p>
+                                {new Intl.DateTimeFormat('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(event.endDateTime))} - {' '}
+                                {new Intl.DateTimeFormat('ru-RU', { hour: '2-digit', minute: '2-digit' }).format(new Date(event.endDateTime))}
                             </p>
-                            
                         </div>
                     </div>
 
@@ -81,7 +84,7 @@ const EventDetails = async ({ params: {id}, searchParams}: SearchParamProps) => 
                 </div>
 
                 <div className="flex flex-col gap-2">
-                    <p className="p-bold-20 text-grey-600">Чему Вы научитесь</p>
+                    <p className="p-bold-20 text-grey-600">Описание</p>
                     <p className="p-medium-16 lg:p-regular-18">{event.description}</p>
                     <p className="p-medium-16 lg:p-regular-18 truncate text-primary-500 underline">{event.url}</p>
                 </div>
@@ -98,9 +101,9 @@ const EventDetails = async ({ params: {id}, searchParams}: SearchParamProps) => 
             emptyTitle="Мероприятий не найдено"
             emptyStateSubtext="Возвращайтесь позже"
             collectionType="All_Events"
-            limit={6}
-            page={1}
-            totalPages={2}
+            limit={3}
+            page={searchParams.page as string}
+            totalPages={relatedEvents?.totalPages}
           />
     </section>
     </>

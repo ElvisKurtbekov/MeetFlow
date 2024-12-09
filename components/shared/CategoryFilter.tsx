@@ -30,23 +30,24 @@ const CategoryFilter = () => {
   }, [])
   
   const onSelectCategory = (category: string) => {
-      let newUrl = '';
-
-      if(category && category !== 'Все') {
-        newUrl = formUrlQuery({
-          params: searchParams?.toString(),
-          key: 'category',
-          value: category
-        })
-      } else {
-        newUrl = removeKeysFromQuery({
-          params: searchParams?.toString(),
-          keysToRemove: ['category']
-        })
-      }
-
-      router.push(newUrl, { scroll: false });
-  }
+    let newUrl = '';
+  
+    if (category && category !== 'Все') {
+      newUrl = formUrlQuery({
+        params: searchParams?.toString() || '', // Проверка на null: используем пустую строку, если searchParams = null
+        key: 'category',
+        value: category,
+      });
+    } else {
+      newUrl = removeKeysFromQuery({
+        params: searchParams?.toString() || '', // Проверка на null: используем пустую строку, если searchParams = null
+        keysToRemove: ['category'],
+      });
+    }
+  
+    router.push(newUrl, { scroll: false });
+  };
+  
 
   return (
     <Select onValueChange={(value: string) => onSelectCategory(value)}>
